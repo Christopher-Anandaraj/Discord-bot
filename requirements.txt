@@ -2,3 +2,4 @@ discord
 flask
 asyncio
 discord.ext
+os
