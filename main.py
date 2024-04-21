@@ -140,7 +140,8 @@ async def character(ctx, *args):
     if not args:
         await ctx.send("Please provide a character name.")
         return   
-    name = " ".join(args).strip()
+    name = "".join(args).strip()
+    name = name.replace(" ","")
     if name.lower() in characters:
         character_info = characters[name.lower()]
         if character_info.damage_type == "Fire":
