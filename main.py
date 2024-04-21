@@ -143,6 +143,7 @@ async def character(ctx, *args):
     name = "".join(args).strip()
     name = name.replace(" ","")
     print("Input name", name.lower())
+    await ctx.send(name.lower())
     if name.lower() in characters:
         character_info = characters[name.lower()]
         if character_info.damage_type == "Fire":
