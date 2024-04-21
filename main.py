@@ -211,7 +211,7 @@ async def on_reaction_remove(reaction, user):
         message = reaction.message     
         await message.edit(embed=cembed)
 
-'''
+
 
 @bot.command()
 async def search(ctx):
@@ -505,7 +505,7 @@ async def droprate(ctx, key_name: str):
         await ctx.send(embed=embed)
     else:
         await ctx.send("Invalid artficat type. Please choose from\n-Head\n-Hands\n-Body\n-Boots\n-Sphere\n-Rope")
-
+'''
 @bot.command()
 async def recommend(ctx):
     characters = ["Qingque E4","Bronya","Tingyun","Pela","Herta","Jing Yuan","Silver Wolf","Luocha","Kafka","Dan Heng IL","Fu Xuan","Jingliu","Topaz","Huo Huo","Argenti","Ruan Mei","Dr Ratio","Black Swan","Sparkle","Acheron","Aventurine","Jiaoqiu","Boothill","Robin","Sam","Jade"]
@@ -648,7 +648,7 @@ async def recommend(ctx):
 
     await ctx.send(response)
 
-
+'''
 
 
 bot.run(token=os.environ.get('token'))
