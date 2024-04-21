@@ -2,3 +2,4 @@ discord
 flask
 asyncio
 os
+from discord.ext import commands
