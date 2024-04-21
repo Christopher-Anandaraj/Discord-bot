@@ -136,9 +136,89 @@ Bestinslots = {
 }
 
 
-
 @bot.command(name="character")
-async def character(ctx, name):
+async def character(ctx, *args):
+    if not args:
+        await ctx.send("Please provide a character name.")
+        return
+    
+    name = " ".join(args).strip()  # Join all args into a single string
+    if name.lower() in characters:
+        character_info = characters[name.lower()]
+        
+        # Determine color based on damage type
+        type_color = None
+        damage_type = character_info.damage_type.lower()
+        if damage_type == "fire":
+            type_color = discord.Color.red()
+        elif damage_type == "imaginary":
+            type_color = discord.Color.yellow()
+        elif damage_type == "physical":
+            type_color = discord.Color.light_grey()
+        elif damage_type == "lightning":
+            type_color = discord.Color.purple()
+        elif damage_type == "quantum":
+            type_color = discord.Color.blurple()
+        elif damage_type == "ice":
+            type_color = discord.Color.blue()
+        elif damage_type == "wind":
+            type_color = discord.Color.green()
+        
+        embed = discord.Embed(title=character_info.name, description="\n\n", color=type_color)
+        embed.set_image(url=character_info.image_url)
+        embed.add_field(name="Path", value=character_info.path, inline=False)
+        embed.add_field(name="Damage Type", value=character_info.damage_type, inline=False)
+        embed.add_field(name="HP", value=character_info.hp, inline=False)
+        embed.add_field(name="Attack", value=character_info.attack, inline=False)
+        embed.add_field(name="Defense", value=character_info.defense, inline=False)
+        embed.add_field(name="Speed", value=character_info.speed, inline=False)
+        embed.add_field(name="Energy Cost", value=character_info.energy_cost, inline=False)       
+        
+        # Store character information within the message object
+        embed.character_info = character_info
+        
+        # Send message
+        message = await ctx.send(embed=embed)
+        
+        # Add Best in Slots reaction
+        await message.add_reaction("⚔️")
+    else:
+        await ctx.send("Character not found, maybe try !search first?")
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    if user.bot:  # Ignore reactions from bots
+        return
+    if reaction.emoji == "⚔️":
+        message = reaction.message
+        if hasattr(message.embeds[0], "character_info"):  # Check if message has character_info attribute
+            character_info = message.embeds[0].character_info
+            bis_embed = await Bestinslots(message.channel, character_info.name)
+            await message.edit(embed=bis_embed)
+
+@bot.event
+async def on_reaction_remove(reaction, user):
+    if user.bot:  # Ignore reactions from bots
+        return
+    if reaction.emoji == "⚔️":
+        message = reaction.message
+        if hasattr(message.embeds[0], "character_info"):  # Check if message has character_info attribute
+            character_info = message.embeds[0].character_info
+            # Reconstruct original character embed with basic information
+            embed = discord.Embed(title=character_info.name, description="\n\n", color=discord.Color.blurple())
+            embed.set_image(url=character_info.image_url)
+            embed.add_field(name="Path", value=character_info.path, inline=False)
+            embed.add_field(name="Damage Type", value=character_info.damage_type, inline=False)
+            # Add any other fields you want to retain
+            await message.edit(embed=embed)
+
+'''
+@bot.command(name="character")
+async def character(ctx, *args):
+    if not args:
+        await ctx.send("Please provide a character name.")
+        return   
+    name = " ".join(args).strip()
     if name.lower() in characters:
         character_info = characters[name.lower()]
         if character_info.damage_type == "Fire":
@@ -211,7 +291,7 @@ async def on_reaction_remove(reaction, user):
         message = reaction.message     
         await message.edit(embed=cembed)
 
-
+'''
 
 @bot.command()
 async def search(ctx):
@@ -652,89 +732,6 @@ async def recommend(ctx):
 
 
 bot.run(token=os.environ.get('token'))
-
-
-
-
-'''
-def main():
-  
-    while True:
-        print("\nHonkai Star Rail Helper")
-        print("What would you like to do?")
-        print("1. Character Information")
-        print("0. Exit")
-
-        # Get user choice
-        choice = input("Enter your choice (1 or 0): ")
-
-        # Validate user input
-        if not choice.isdigit() or int(choice) not in (0, 1):
-            print("Invalid choice. Please enter 0 or 1.")
-            continue
-
-        # Handle user choice
-        choice = int(choice)
-        if choice == 0:
-            print("Exiting program.")
-            break
-        elif choice == 1:
-            show_character_info(characters)
-
-def show_character_info(characters):
- 
-    while True:
-        print("\nCharacter Information")
-        print("1. Select a character")
-        print("2. Search characters by first letter")
-        print("0. Go back to the main menu")
-
-        # Get user choice
-        choice = input("Enter your choice (1, 2, or 0): ")
-
-        # Validate user input
-        if not choice.isdigit() or int(choice) not in (0, 1, 2):
-            print("Invalid choice. Please enter 0, 1, or 2.")
-            continue
-
-        # Handle user choice
-        choice = int(choice)
-        if choice == 0:
-            break
-        elif choice == 1:
-            while True:
-                selected_character = input("\nSelect a character (or type 'menu' to go back to the main menu): ")
-                if selected_character.lower() == 'menu':
-                    break
-                elif selected_character in characters:
-                    character_info = characters[selected_character]
-                    print_character_info(character_info)
-                else:
-                    print("Character not found!\n")
-        elif choice == 2:
-            search_characters(characters)
-
-def search(characters):
-   
-    while True:
-        search_letter = input("Enter the first letter of the character's name (or type 'menu' to go back to the main menu): ").lower()
-        if search_letter.lower() == 'menu':
-            break
-        matched_characters = [char for char in characters if char.lower().startswith(search_letter)]
-        if matched_characters:
-            print(f"\nCharacters with names starting with '{search_letter}':")
-            for char in matched_characters:
-                print("-", char)
-        else:
-            print(f"No characters found with names starting with '{search_letter}'. Please try again.")
-
-def print_character_info(character_info):
-   
-    print(f"Name: {character_info.name} (level80)\nPath: {character_info.path}\nDamage Type: {character_info.damage_type}\nHP: {character_info.hp}\nAttack: {character_info.attack}\nDefense: {character_info.defense}\nSpeed: {character_info.speed}\nEnergy Cost: {character_info.energy_cost}\nRarity: {character_info.rarity}")
-
-if __name__ == "__main__":
-    main()
-'''
 
 
 
