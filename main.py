@@ -56,7 +56,7 @@ characters = {
     "himeko": Character("Himeko", "Erudition", "Fire", "5-Star", 1047, 756, 436, 96, 120, "https://www.escapistmagazine.com/wp-content/uploads/2023/10/Himeko-Build.jpeg"),
     "hook": Character("Hook", "Destruction", "Fire", "4-Star", 1340, 617, 352, 94, 120, "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/05/honkai-star-rail-best-hook-build.jpg"),
     "huohuo": Character("Huohuo", "Abundance", "Wind", "5-Star", 1358, 601, 509, 98, 140, "https://images-ng.pixai.art/images/orig/10b6f736-cba4-4754-bf51-580e6351ed1a"),
-    "imbibitorlunae": Character("Imbibitor Lunae", "Destruction", "Imaginary", "5-Star", 1241, 698, 363, 102, 140, "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/07/honkai-star-rail-imbibitor-lunae-dan-heng.jpg"),
+    "dhil": Character("Imbibitor Lunae", "Destruction", "Imaginary", "5-Star", 1241, 698, 363, 102, 140, "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/07/honkai-star-rail-imbibitor-lunae-dan-heng.jpg"),
     "jingyuan": Character("Jing Yuan", "Erudition", "Lightning", "5-Star", 1164, 698, 485, 99, 130,"https://s.yimg.com/ny/api/res/1.2/uJVkYf8E3jP0FJbKqf2FvA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://s.yimg.com/os/creatr-uploaded-images/2023-05/a25ce0e0-f46a-11ed-bbf9-378d9906cf8d" ),
     "jingliu": Character("Jingliu", "Destruction", "Ice", "5-Star", 1435, 679, 485, 96, 140, "https://assetsio.gnwcdn.com/Honkai-Star-Rail-Jingliu-Eidolons-1.jpg?width=1200&height=600&fit=crop&enable=upscale&auto=webp"),
     "kafka": Character("Kafka", "Nihility", "Lightning", "5-Star", 1086, 679, 485, 100, 120, "https://editors.dexerto.com/wp-content/uploads/2023/07/08/Kafka-Honkai-Star-Rail-guide.jpg"),
