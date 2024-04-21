@@ -96,7 +96,7 @@ Bestinslots = {
     "Bronya": ["But the Battle Isn't Over", "Past and Future", "Planetary Rendezvous"],
     "Clara": ["Brighter Than the Sun", "Something Irreplaceable", "Under the Blue Sky"],
     "Dan Heng": ["In the Night", "Cruising in the Stellar Sea", "Only Silence Remains"],
-    "Dan Heng • Imbibitor Lunae": ["Brighter Than the Sun", "On the Fall of an Aeon", "Under the Blue Sky"],
+    "Imbibitor Lunae": ["Brighter Than the Sun", "On the Fall of an Aeon", "Under the Blue Sky"],
     "Dr. Ratio": ["Baptism of Pure Thought", "Worrisome, Blissful", "Only Silence Remains"],
     "Fu Xuan": ["She Already Shut Her Eyes", "Moment of Victory", "Landau's Choice"],
     "Gallagher": ["Night of Fright", "Echoes of the Coffin", "Perfect Timing"],
