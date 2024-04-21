@@ -135,62 +135,6 @@ Bestinslots = {
     "Yukong": ["Planetary Rendezvous", "Memories of the Past", "But the Battle Isn't Over"]
 }
 
-
-@bot.command(name="character")
-async def character(ctx, name):
-    if name.lower() in characters:
-        character_info = characters[name.lower()]
-        if character_info.damage_type == "Fire":
-            type_color = discord.Color.red()
-        elif character_info.damage_type == "Imaginary":
-            type_color = discord.Color.yellow()
-        elif character_info.damage_type == "Physical":
-            type_color = discord.Color.light_grey()
-        elif character_info.damage_type == "Lightning":
-            type_color = discord.Color.purple()
-        elif character_info.damage_type == "Quantum":
-            type_color = discord.Color.blurple()
-        elif character_info.damage_type == "Ice":
-            type_color = discord.Color.blue()
-        elif character_info.damage_type == "Wind":
-            type_color = discord.Color.green()
-        elif character_info.damage_type == "Physical":
-            type_color = discord.Color.light_grey()
-        global cembed
-        cembed = discord.Embed(title=character_info.name, description="\n\n", color=type_color)
-        cembed.set_image(url=character_info.image_url)
-        cembed.add_field(name="Path", value=character_info.path, inline=False)
-        cembed.add_field(name="Damage Type", value=character_info.damage_type, inline=False)
-        cembed.add_field(name="HP", value=character_info.hp, inline=False)
-        cembed.add_field(name="Attack", value=character_info.attack, inline=False)
-        cembed.add_field(name="Defense", value=character_info.defense, inline=False)
-        cembed.add_field(name="Speed", value=character_info.speed, inline=False)
-        cembed.add_field(name="Energy Cost", value=character_info.energy_cost, inline=False)       
-        bis_embed = await best_in_slots(ctx, name)
-        
-        message = await ctx.send(embed=cembed)
-        await message.add_reaction("⚔️")  # Add reaction for Best in Slot
-    else:
-        await ctx.send("Character not found, maybe try !search first?")
-
-@bot.event
-async def on_reaction_add(reaction, user):
-    if user.bot:  # Ignore reactions from bots
-        return
-    if reaction.emoji == "⚔️":
-        message = reaction.message
-        character_name = message.embeds[0].title  # Get the character name from the embed title
-        bis_embed = await best_in_slots(reaction.message.channel, character_name)
-        await message.edit(embed=bis_embed)
-@bot.event
-async def on_reaction_remove(reaction, user):
-    if user.bot:  # Ignore reactions from bots
-        return
-    if reaction.emoji == "⚔️":
-        message = reaction.message     
-        await message.edit(embed=cembed)
-
-'''
 @bot.command(name="character")
 async def character(ctx, *args):
     if not args:
@@ -213,8 +157,6 @@ async def character(ctx, *args):
             type_color = discord.Color.blue()
         elif character_info.damage_type == "Wind":
             type_color = discord.Color.green()
-        elif character_info.damage_type == "Physical":
-            type_color = discord.Color.light_grey()
         global cembed
         cembed = discord.Embed(title=character_info.name, description="\n\n", color=type_color)
         cembed.set_image(url=character_info.image_url)
